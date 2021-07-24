@@ -1,4 +1,4 @@
---https://discord.gg/https://discord.gg/nv3M7sQAvw
+--https://discord.gg/nv3M7sQAvw
 --Anime FIGHTER Simulator
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
