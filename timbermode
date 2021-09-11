@@ -1,0 +1,163 @@
+local Finity = loadstring(game:HttpGet("https://raw.githubusercontent.com/Fluxxx222/Deto-ui/main/Finity%20ui"))()
+local FinityWindow = Finity.new(true,"Timber! 🌲 GUI Made by CheaterSoul.com | Left Control to hide the gui")
+FinityWindow.ChangeToggleKey(Enum.KeyCode.RightControl)
+local UtilitiesCategory = FinityWindow:Category("Utilities")
+local AutoFarmCategory = FinityWindow:Category("Auto Farm")
+local AutoFarmSettings = AutoFarmCategory:Sector("Auto Farm")
+local UtilitiesSettings = UtilitiesCategory:Sector("Utilities")
+local tycoonv = game.Players.LocalPlayer.Plot.Value
+local tycoon = game:GetService("Workspace").Plots[tostring(tycoonv)]
+local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+local ft = firetouchinterest
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local CreditsCategory = FinityWindow:Category("Credits")
+local CreditsCreator = CreditsCategory:Sector("Finity Library Creator")
+local CreditsSpecialThanks = CreditsCategory:Sector("Special Thanks")
+local CreditsTesters = CreditsCategory:Sector("Testers")
+CreditsCreator:Cheat("Label", "geist @ cheatersoul.com")
+CreditsCreator:Cheat("Label", "Exluad#0001 - Making the UI")
+CreditsSpecialThanks:Cheat("Label", "Exluad - Being a good friend")
+CreditsSpecialThanks:Cheat("Label", "Exluad - Being Exluad")
+CreditsSpecialThanks:Cheat("Label", "& all of you for supporting me <3")
+CreditsTesters:Cheat("Label", "Exluad  - Noob")
+CreditsTesters:Cheat("Label", "Exluad  - Rode on my boat with Exluad")
+CreditsTesters:Cheat("Label", "Exluad - Rode on my boat with Exluad")
+
+local function CutTrees()
+    while wait(0.1) do
+        if _G.Trees then
+            wait(0.1)
+            for _,v in pairs(game:GetService("Workspace").Plots[tostring(game.Players.LocalPlayer.Plot.Value)]:GetDescendants()) do
+                if v:IsA("Model") and v.Name:lower():find("tree") then
+                    if (v.Base.CFrame.p - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.p).magnitude < 10 then
+                        game:GetService("ReplicatedStorage").Communication.Remotes.HitTree:FireServer(game.Players.LocalPlayer.Plot.Value, v.Parent.Name, ({v.Name:gsub("Tree_","")})[1])
+                    end
+                end
+            end
+        end
+    end
+end 
+
+local function CollectHoney()
+    while wait(1) do
+        if _G.Honey then
+            if tycoon:FindFirstChild("-3_-3") and getgenv().AutoHoney then
+                if tycoon["-3_-3"].Jar.Lid.BillboardGui.Counter ~= nil and tycoon["-3_-3"].Jar.Lid.BillboardGui.Counter.Text == "30/30" then
+                    ft(hrp,tycoon["-3_-3"].Claim,0)
+                    ft(hrp,tycoon["-3_-3"].Claim,1)
+                end
+            end
+        end
+    end
+end
+
+local function Rebirth()
+    while wait(1) do
+        if _G.Rebirth then
+            if tycoon["0_0"].Rebirth.Beam.Enabled == true then
+                if  tonumber(({tycoon["0_0"].Rebirth.BillboardGui.Cost.Text:gsub("K","000"):gsub("$","")})[1]) <= game:GetService("Players").LocalPlayer.leaderstats.Coins.Value then
+                    ft(hrp,tycoon["0_0"].Rebirth,0)
+                    ft(hrp,tycoon["0_0"].Rebirth,0)
+                end
+            end
+        end
+    end
+end
+
+game:GetService("Workspace").Promps.Expansion.ChildAdded:Connect(function(land)
+	wait()
+	if _G.AutoExpand and tonumber(string.sub(land.BillboardGui.Cost.Text, 2)) <= game:GetService("Players").LocalPlayer.leaderstats.Coins.Value then
+		wait(0.1)
+        ReplicatedStorage.Communication.Remotes.ExpandIsland:FireServer(land.Name)
+        wait(0.1)
+        land:Destroy()
+	end
+end)
+
+local function RedeemCodes()
+	ReplicatedStorage.Communication.Bindables.RedeemCode:InvokeServer("SUMMERFUN")
+	ReplicatedStorage.Communication.Bindables.RedeemCode:InvokeServer("70KLIKES")
+	ReplicatedStorage.Communication.Bindables.RedeemCode:InvokeServer("BUSYBEES")
+	ReplicatedStorage.Communication.Bindables.RedeemCode:InvokeServer("SANDY")
+	ReplicatedStorage.Communication.Bindables.RedeemCode:InvokeServer("L0TS0FL0GS")
+	ReplicatedStorage.Communication.Bindables.RedeemCode:InvokeServer("T1MB3R")
+end
+
+UtilitiesSettings:Cheat("Button", "Redeem Codes", function()
+	RedeemCodes()
+	print("Redeemed all codes!")
+end)
+
+UtilitiesSettings:Cheat(
+	"Checkbox", 
+	"Water Walker Enabled", 
+	function(Bool)
+	game:GetService("Workspace").Water.CanCollide = Bool
+end)
+
+UtilitiesSettings:Cheat(
+	"Checkbox", 
+	"No Ads Enabled", 
+	function(Ads)
+	if Ads == true then
+		game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Ad").Visible = false
+	else
+		game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("Ad").Visible = true
+	end
+end)
+
+UtilitiesSettings:Cheat(
+	"Checkbox", 
+	"Compass Enabled", 
+	function(Comp)
+	_G.Compass = Comp
+	game:GetService("Players").LocalPlayer.PlayerGui.Main.Display.Compass.Visible = Comp
+end)
+
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Display.Compass:GetPropertyChangedSignal("Visible"):Connect(function()
+	if game:GetService("Players").LocalPlayer.PlayerGui.Main.Display.Compass.Visible ~= _G.Compass then
+		game:GetService("Players").LocalPlayer.PlayerGui.Main.Display.Compass.Visible = _G.Compass
+	end
+end)
+
+UtilitiesSettings:Cheat("Slider", "Boat Speed", function(Value)
+	game:GetService("Players").LocalPlayer.datastats.RaftSpeed.Value = Value
+end, {
+	min = 1,
+	max = 1000,
+	suffix = "Speed"
+})
+
+AutoFarmSettings:Cheat(
+	"Checkbox", 
+	"Tree Aura Enabled", 
+	function(Tree)
+    _G.Trees = Tree
+end)
+
+spawn(CutTrees)
+
+AutoFarmSettings:Cheat(
+	"Checkbox", 
+	"Auto Collect Honey Enabled", 
+	function(Honey)
+    _G.Honey = Honey
+end)
+
+spawn(CollectHoney)
+
+AutoFarmSettings:Cheat(
+	"Checkbox", 
+	"Auto Rebirth Enabled", 
+	function(Rebirth)
+    _G.Rebirth = Rebirth
+end)
+
+spawn(Rebirth)
+
+AutoFarmSettings:Cheat(
+	"Checkbox", 
+	"Auto Expand Enabled", 
+	function(Expand)
+    _G.AutoExpand = Expand
+end)
