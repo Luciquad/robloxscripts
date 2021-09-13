@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/Luciquad/robloxscripts/main/soulbeatv2
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Luciquad/robloxscripts/main/soulbeatv2", true))()
