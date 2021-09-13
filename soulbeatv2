@@ -1,0 +1,42 @@
+-- Paid Exploit Library Example
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Luciquad/robloxscripts/main/soulbeat", true))()
+
+local tab1 = library:CreateTab("CheaterSoul.com", true)
+local button = library:MakeButton(tab1,"AutoWin",function(button)
+    wait(1.2)
+game.StarterGui:SetCore("SendNotification", {
+Title = "Executed";
+Text = "Wait Up To 2 Minutes";
+Icon = "rbxassetid://400971023"; -- the image if u want. 
+Duration = 5; 
+})
+     while wait () do
+game:GetService("ReplicatedStorage").Remotes.Game.Win:FireServer()
+end
+end)
+
+
+local button = library:MakeButton(tab1,"+Time",function(button)
+     game:GetService("ReplicatedStorage").Remotes.Shop:FindFirstChild("+Time"):FireServer()
+end)
+
+
+local button = library:MakeButton(tab1,"Small Body",function(button)
+     game:GetService("ReplicatedStorage").Remotes.Shop:FindFirstChild("Small Body"):FireServer()
+end)
+
+local button = library:MakeButton(tab1,"FOV",function(button)
+    game:GetService("ReplicatedStorage").Remotes.Shop.FOV:FireServer()
+end)
+
+local button = library:MakeButton(tab1,"Darkness",function(button)
+     game:GetService("ReplicatedStorage").Remotes.Shop.Darkness:FireServer()
+end)
+
+local button = library:MakeButton(tab1,"Fast Timer",function(button)
+    game:GetService("ReplicatedStorage").Remotes.Shop:FindFirstChild("Fast Timer"):FireServer()
+end)
+
+local button = library:MakeButton(tab1,"Freeze Parts",function(button)
+game:GetService("ReplicatedStorage").Remotes.Shop.Freeze:FireServer()
+end)
